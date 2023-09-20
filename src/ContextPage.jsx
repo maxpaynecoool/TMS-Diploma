@@ -6,8 +6,10 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import {auth} from "./firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
 
+// @ts-ignore
 export const ContextPage = createContext()
 
+// @ts-ignore
 const MovieProvider = ({children}) => {
 
     const [header, setHeader] = useState("Trending")
@@ -21,6 +23,8 @@ const MovieProvider = ({children}) => {
     const [genres, setGenres] = useState([])
     const [backGenre, setBackGenre] = useState(false)
     const [user, setUser] = useAuthState(auth)
+    const [loader, setLoader] = useState(true)
+    const [theme, setTheme] = useState('bg-black')
     const navigate = useNavigate()
 
 
@@ -37,6 +41,7 @@ const MovieProvider = ({children}) => {
         const filteredGenre = await data.json();
         setMovies(movies.concat(filteredGenre.results));
         setTotalPage(filteredGenre.total_pages);
+        setLoader(false);
         setHeader("Genres");
     };
 
@@ -77,14 +82,11 @@ const MovieProvider = ({children}) => {
         setHeader("Upcoming Movies");
     }
 
-    // creat local storage
     const GetFavorite = () => {
         setHeader("Favorite Movies");
     }
 
-
-    //<========= firebase Google Authentication ========>
-    const googleProvider = new GoogleAuthProvider();// =====> google auth provide
+    const googleProvider = new GoogleAuthProvider();
 
     const GoogleLogin = async () => {
         try {
@@ -117,11 +119,14 @@ const MovieProvider = ({children}) => {
             activeGenre,
             setActiveGenre,
             trending,
+            loader,
             upcoming,
             searchedMovies,
             totalPage,
             setBackGenre,
-            user
+            user,
+            theme,
+            setTheme
         }}>
             {children}
         </ContextPage.Provider>

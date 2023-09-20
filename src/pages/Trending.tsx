@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import MovieCard from "../components/MovieCard";
 import {useContext, useEffect} from "react";
 import {ContextPage} from "../ContextPage";
+import {IMovie} from "../components/Movies";
 
 function Trending() {
 
@@ -20,7 +21,6 @@ function Trending() {
 
     return (
         <>
-
             <div className='w-full bg-[#10141e] md:p-10 mb-20 md:mb-0'>
                 <Header/>
                 <div
@@ -34,12 +34,11 @@ function Trending() {
                                     next={() => setPage(page + 1)}
                                     hasMore={page < totalPage}
                                     loader={<span className="loader m-10"></span>}
-                                    scrollThreshol={0.9}
                                     style={{overflow: 'hidden'}}
                                 >
 
-                                    {trending.map((tred) => (
-                                        <MovieCard key={tred.id} movie={tred}/>
+                                    {trending.map((trend: IMovie) => (
+                                        <MovieCard key={trend.id} movie={trend}/>
                                     ))}
 
                                 </InfiniteScroll>

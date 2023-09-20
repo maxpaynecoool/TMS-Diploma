@@ -6,6 +6,7 @@ import Header from '../components/Header';
 // import { Helmet } from 'react-helmet';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import {ContextPage} from "../ContextPage";
+import {IMovie} from "../components/Movies";
 
 function Upcoming() {
 
@@ -38,11 +39,10 @@ function Upcoming() {
                     next={() => setPage(page + 1)}
                     hasMore={page < totalPage}
                     loader={<span className="loader m-10"></span>}
-                    scrollThreshol={0.9}
                     style={{ overflow: 'hidden' }}
                   >
 
-                    {upcoming.map((upc) => (
+                    {upcoming.map((upc: IMovie) => (
                       <MovieCard key={upc.id} movie={upc} />
                     ))}
 

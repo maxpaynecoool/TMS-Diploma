@@ -6,17 +6,17 @@ import { Link, useParams } from 'react-router-dom'
 import { HiChevronLeft } from "react-icons/hi";
 import {ContextPage} from "../ContextPage";
 import MovieCard from "../components/MovieCard";
+import {IMovie} from "../components/Movies";
 
 
-function Search() {
+function Search({query}: {query: string}) {
 
-    const { searchedMovies, loader, page, setPage, totalPage, setMovies, activegenre, filteredGenre, fetchSearch } = useContext(ContextPage);
-    const { query } = useParams()
+    const { searchedMovies, loader, fetchSearch } = useContext(ContextPage)
+    // const { query } = useParams()
 
     useEffect(() => {
-        // Call fetchSearch(query) only once when the component mounts
-        fetchSearch(query);
-    }, [query]); // Only re-run if 'query' or 'fetchSearch' changes
+        fetchSearch(query)
+    }, [query])
 
     return (
         <section>
@@ -28,14 +28,12 @@ function Search() {
                         {
                             loader ? <span className="loader m-10"></span> :
                                 <>
-                                        {searchedMovies.map((movie) => (
+                                        {searchedMovies.map((movie: IMovie) => (
                                             <MovieCard key={movie.id} movie={movie} />
                                         ))}
                                 </>
                         }
                 </div>
-                {/* <Pagebtn /> */}
-
             </div>
         </section>
 

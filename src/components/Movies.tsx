@@ -5,12 +5,31 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import MovieCard from "./MovieCard";
 import Header from "./Header";
 
+
+export interface IMovie {
+    adult: boolean
+    backdrop_path: string
+    genre_ids: number[]
+    id: number
+    name: string
+    original_language: string
+    original_title: string
+    overview: string
+    popularity: number
+    poster_path: string
+    release_date: string
+    title: string
+    video: boolean
+    vote_average: number
+    vote_count: number
+}
+
 const Movies = () => {
     const {movies, loader, page, setPage, totalPage, setMovies, activeGenre, filteredGenre} = useContext(ContextPage)
 
     useEffect(() => {
         setPage(1)
-    }, [])
+    }, []);
 
     useEffect(() => {
         setMovies([])
@@ -19,9 +38,11 @@ const Movies = () => {
 
     useEffect(() => {
         if (page > 0) {
-            filteredGenre(); // Fetch filtered genre when page changes and only if page is greater than 0.
+            filteredGenre();
         }
     }, [page])
+
+    console.log(movies)
 
     return (
         <div className='w-full bg-[#10141e] md:p-10 mb-20 md:mb-0'>
@@ -35,17 +56,19 @@ const Movies = () => {
                             {/* {console.log(movies.length)} */}
                             <InfiniteScroll
                                 className="w-full md:p-2 flex flex-wrap relative justify-evenly md:justify-around"
-                                dataLength={movies.length} //This is important field to render the next data
+                                dataLength={movies.length}
                                 next={() => setPage(page + 1)}
                                 hasMore={page < totalPage}
                                 loader={<span className="loader m-10"></span>}
-                                scrollThreshol={0.9}
                                 style={{overflow: 'hidden'}}
                             >
 
-                                {movies.map((movie) => (
-                                    <MovieCard key={movie.id} movie={movie}/>
-                                ))}
+                                {movies.map((movie: IMovie) => {
+                                    console.log(movie)
+                                    return (
+                                        <MovieCard key={movie.id} movie={movie}/>
+
+                                    )})}
 
                             </InfiniteScroll>
 

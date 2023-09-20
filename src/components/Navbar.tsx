@@ -1,15 +1,17 @@
 import React, {useContext, useState} from 'react';
+// @ts-ignore
 import logo from '../assets/images/logo.png';
 import {Link} from "react-router-dom";
 import {ContextPage} from "../ContextPage";
 import {HiMenuAlt1, HiX} from "react-icons/hi";
+// @ts-ignore
 import User from '../assets/images/User.jpg';
 import {toast} from "react-toastify";
 import {auth} from "../firebase";
 
 const Navbar = () => {
     const [activeMobile, setActiveMobile] = useState(false);
-    const {header, user} = useContext(ContextPage)
+    const {header, user, theme, setTheme} = useContext(ContextPage)
 
     // console.log(user)
     const navData = [
@@ -47,7 +49,7 @@ const Navbar = () => {
                 {activeMobile ? <HiX /> : <HiMenuAlt1 />}
             </button>
 
-            <nav className={`${activeMobile ? 'block' : 'hidden'} fixed bg-black/90 md:bg-black h-full w-full md:w-[15rem] z-30 md:block`}>
+            <nav className={`${activeMobile ? 'block' : 'hidden'} fixed bg-black md:${theme} h-full w-full md:w-[15rem] z-30 md:block`}>
                 <Link
                     to="/"
                     className="logo flex flex-col justify-center items-center m-7 gap-2"
@@ -67,14 +69,16 @@ const Navbar = () => {
                     ))}
                 </ul>
 
+
                 <div className="absolute bottom-0 w-full p-5 md:p-2 text-white">
+                    <button onClick={() => setTheme('bg-white')}>theme</button>
                     {user ? <>
                             <div className="w-full bg-gray-900 px-5 py-2 gap-4 rounded-xl flex items-center font-semibold border-2 border-blue-100/10">
                                 <img src={user.photoURL == null ? User : user.photoURL} alt="user" className="h-10 rounded-full" />
                                 <h1>{user.displayName}</h1>
                             </div>
 
-                            <div className="cursor-pointer bg-red-500 flex justify-center items-center p-2 rounded-xl mt-2" onClick={() => auth.signOut(toast.error("Logout successfully"))}>
+                            <div className="cursor-pointer bg-red-500 flex justify-center items-center p-2 rounded-xl mt-2" onClick={() => auth.signOut()}>
                                 <h1>Logout</h1>
                             </div>
                         </>

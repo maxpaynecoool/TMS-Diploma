@@ -4,6 +4,7 @@ import {ContextPage} from "../ContextPage";
 
 function Login() {
     
+    // @ts-ignore
     const {GoogleLogin} = useContext(ContextPage);
 
     return (
