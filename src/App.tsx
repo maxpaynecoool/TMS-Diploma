@@ -11,9 +11,11 @@ import {Detail} from "./components/Detail";
 import Favoritepage from "./pages/Favoritepage";
 // import Player from "./pages/Player";
 import Login from "./auth/Login";
+import {ToastContainer} from "react-toastify";
 
 function App() {
 
+    // @ts-ignore
     return (
         <MovieProvider>
             <Navbar/>

@@ -10,9 +10,9 @@ function Trending() {
 
     const {loader, page, setPage, fetchTrending, trending, totalPage} = useContext(ContextPage);
 
-    // useEffect(() => {
-    //     setPage(1) // Reset Page to 1 on initial render.
-    // }, []);
+    useEffect(() => {
+        setPage(1)
+    }, []);
 
     useEffect(() => {
         fetchTrending();

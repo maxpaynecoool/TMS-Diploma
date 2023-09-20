@@ -10,6 +10,7 @@ import { AiFillStar, AiOutlineStar} from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import {ContextPage} from "../ContextPage";
 import {IMovie} from "./Movies";
+import { motion } from 'framer-motion'
 
 
 
@@ -28,7 +29,7 @@ const MovieCard = ({movie}: {movie: IMovie}) => {
 
     const BookmarkMovie = () => {
         if (!user) {
-            toast.info("To bookmark this movie, please log in.");
+            alert('To add this movie to your favorites, please log in.')
         } else {
             setIsBookmarked(!isBookmarked)
             if (isBookmarked) {
@@ -43,7 +44,9 @@ const MovieCard = ({movie}: {movie: IMovie}) => {
         <div
             className="card relative w-full md:w-60 h-[410px] md:h-[360px] my-3 mx-4 md:my-5 md:mx-0 cursor-pointer rounded-xl overflow-hidden">
 
-            <button className="absolute bg-black text-white p-2 z-20 right-0 m-3 rounded-full text-xl" onClick={BookmarkMovie}> {isBookmarked ? <AiFillStar /> : <AiOutlineStar/>}</button>
+            <button className="absolute bg-black text-white p-2 z-20 right-0 m-3 rounded-full text-xl"
+                    onClick={BookmarkMovie}> {isBookmarked ? <AiFillStar /> : <AiOutlineStar/>}
+            </button>
 
             <div className='absolute bottom-0 w-full flex justify-between items-end p-3 z-20'>
                 <h1 className='text-white text-xl font-semibold  break-normal break-words'>{movie.title || movie.name}</h1>

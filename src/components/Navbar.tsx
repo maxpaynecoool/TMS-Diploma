@@ -71,7 +71,7 @@ const Navbar = () => {
 
 
                 <div className="absolute bottom-0 w-full p-5 md:p-2 text-white">
-                    <button onClick={() => setTheme('bg-white')}>theme</button>
+                    {/*<button onClick={() => setTheme('bg-white')}>theme</button>*/}
                     {user ? <>
                             <div className="w-full bg-gray-900 px-5 py-2 gap-4 rounded-xl flex items-center font-semibold border-2 border-blue-100/10">
                                 <img src={user.photoURL == null ? User : user.photoURL} alt="user" className="h-10 rounded-full" />

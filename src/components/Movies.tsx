@@ -5,6 +5,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import MovieCard from "./MovieCard";
 import Header from "./Header";
 
+export interface ICountry {
+    name: string;
+}
+
 
 export interface IMovie {
     adult: boolean
@@ -18,7 +22,11 @@ export interface IMovie {
     popularity: number
     poster_path: string
     release_date: string
+    production_countries: [
+        {name: string}
+    ]
     title: string
+    tagline: string
     video: boolean
     vote_average: number
     vote_count: number

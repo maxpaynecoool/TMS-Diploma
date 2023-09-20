@@ -10,7 +10,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import slugify from 'react-slugify';
 import {ContextPage} from "../ContextPage";
 import {APIKEY} from "../Constants";
-import {IMovie} from "./Movies";
+import {ICountry, IMovie} from "./Movies";
 
 interface ICastData {
     adult: boolean
@@ -53,6 +53,8 @@ export const Detail = () => {
     const [moviegenres, setMoviegenres] = useState([]);
     const [video, setVideo] = useState([]);
 
+    console.log(moviedet)
+
     const fetchMovie = async () => {
         const data = await fetch(
             `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}&language=en-US`
@@ -85,6 +87,7 @@ export const Detail = () => {
     }, []);
 
 
+
     return (
         <>
             {
@@ -98,7 +101,12 @@ export const Detail = () => {
                             <img src={"https://image.tmdb.org/t/p/original/" + moviedet.backdrop_path}
                                  className='h-full w-full'/>}
                     </div>
+                    <h1 className='text-3xl text-blue-300 uppercase text-center pt-5 px-3 md:px-60 font-Roboto text-[20px]'>«{moviedet.tagline}»</h1>
                     <h2 className='text-white text-center pt-5 px-3 md:px-60 font-Roboto text-[18px]'>{moviedet.overview}</h2>
+                    {/*<h1 className='text-3xl text-blue-300 uppercase text-center pt-5 px-3 md:px-60 font-Roboto text-[20px]'>Country</h1>*/}
+                    {/*<h2 className='text-white text-center pt-3 px-3 md:px-60 font-Roboto text-[18px]'>*/}
+                    {/*    {moviedet.production_countries.map((country: ICountry) => <span>{country.name}</span>)}*/}
+                    {/*</h2>*/}
 
                     <div className='text-blue-100 font-semibold my-3 flex justify-center'>
                         <h2 className='bg-blue-600/30 border-2 border-blue-700 py-2 px-3 rounded-full'>Release Date
@@ -118,8 +126,8 @@ export const Detail = () => {
                     <div className='flex flex-col items-center'>
                         <h1 className="text-3xl text-blue-300 font-semibold text-center p-2">Cast</h1>
 
-                        <div className="md:px-5 flex flex-row my-5 max-w-full flex-start overflow-x-auto relative
-              scrollbar-thin scrollbar-thumb-gray-500/20 scrollbar-track-gray-900/90 md:pb-3">
+                        <div
+                            className="md:px-5 flex flex-row my-5 max-w-full flex-start overflow-x-auto relative scrollbar-thin scrollbar-thumb-gray-500/20 scrollbar-track-gray-900/90 md:pb-3">
                             {castdata.map((cast: ICastData) => (
                                 <>
                                     {cast.profile_path !== null ? <>
